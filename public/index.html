@@ -36,6 +36,115 @@
         body, #message { margin-top: 0; background: white; box-shadow: none; }
         body { border-top: 16px solid #ffa100; }
       }
+      body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #333;
+      color: #f3f3f3;
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 300px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode .login-container {
+      background-color: #444;
+      color: #f3f3f3;
+    }
+
+    .login-container h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode .login-container input[type="text"],
+    body.dark-mode .login-container input[type="password"] {
+      background-color: #666;
+      color: #f3f3f3;
+      border-color: #555;
+    }
+
+    .login-container input[type="submit"] {
+      width: 100%;
+      background-color: #4caf50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .login-container input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .login-container .signup-link {
+      text-align: center;
+    }
+
+    .login-container .signup-link a {
+      color: #4caf50;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    body.dark-mode .login-container .signup-link a {
+      color: #90ee90;
+    }
+
+    .login-container .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    .dark-mode-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      padding: 10px;
+      background-color: #333;
+      color: #f3f3f3;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode .dark-mode-toggle {
+      background-color: #f3f3f3;
+      color: #333;
+    }
     </style>
   </head>
   <body>
@@ -46,7 +155,35 @@
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
     <p id="load">Firebase SDK Loading&hellip;</p>
-
+    <div class="login-container">
+      <h2>Entre</h2>
+      <form action="/login" method="post">
+        <input type="text" name="username" placeholder="Usuário" required>
+        <input type="password" name="password" placeholder="Senha" required>
+        <input type="submit" value="Login">
+      </form>
+    </div>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+  
+        darkModeToggle.addEventListener('click', function () {
+          document.body.classList.toggle('dark-mode');
+          updateToggleButton();
+        });
+  
+        function updateToggleButton() {
+          if (document.body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = 'Modo Claro';
+          } else {
+            darkModeToggle.textContent = 'Modo Escuro';
+          }
+        }
+  
+        updateToggleButton();
+      });
+    </script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
